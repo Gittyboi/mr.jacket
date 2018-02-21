@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket.IO usage</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+console.log('hi');
+var socket = io('http://192.168.31.183:3000/');
+console.log('hi');
+socket.on('listener123',function(data){console.log(data);
+var elem = document.getElementById("aud");
+
+elem.currentTime = data;
+console.log(elem.currentTime);
+});
+ </script>
+
+<audio controls="controls" muted id="aud">
+    <source src="https://docs.google.com/uc?export=download&id=1CBJwRUdKR2muwtJah9WPxZNAi8esT_vj">
+</audio>
+
+
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+<!-- <script src="/main.js"></script>-->
+</body>
+</html>

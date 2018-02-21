@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dubberwala's</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="/socket.io/socket.io.js"></script>
+<video controls muted name="media" id="vid"><source src="video5.mp4"></video>
+
+
+<audio controls="controls" muted class="aud">
+    <source src="https://docs.google.com/uc?export=download&id=1lfnFCCKIGsRj_NBBwPcqREi78iY2CR9l">
+</audio>
+
+<audio controls="controls" muted class="aud">
+    <source src="https://docs.google.com/uc?export=download&id=1lfnFCCKIGsRj_NBBwPcqREi78iY2CR9l">
+</audio>
+
+<audio controls="controls" muted class="aud">
+    <source src="https://docs.google.com/uc?export=download&id=1lfnFCCKIGsRj_NBBwPcqREi78iY2CR9l">
+</audio>
+
+<audio controls="controls">
+    <source src="https://docs.google.com/uc?export=download&id=1lfnFCCKIGsRj_NBBwPcqREi78iY2CR9l">
+</audio>
+
+<script>
+var socket = io('http://localhost:3000');
+ var curr=0;
+  var prev = -1;
+  var elem = document.getElementById("vid");
+  setInterval(function(){
+        curr = elem.currentTime;
+        if(elem)
+        if(prev==-1&&curr==0)
+        {
+          //do nothing
+          console.log('case 1');
+          console.log(curr);
+          console.log(prev);
+        }
+        else if((prev+1)<=curr||curr<=(prev+1))
+        {
+          console.log('case 2');
+           console.log(curr);
+          console.log(prev);
+          prev=curr;
+          socket.emit('video_control',curr);
+          console.log("hello");
+        }
+        else
+        {
+          console.log('case 3');
+           console.log(curr);
+          console.log(prev);
+          prev=curr;
+        }
+   }, 1000);
+
+   //socket.emit('video_control',curr);
+
+socket.on('listener123',function(data){
+  var elem = document.getElementsByClassName("aud");
+for(var i=0; i<elem.length; i++) {
+     elem[i].currentTime=data;
+}
+
+
+//  elem.currentTime=data;
+
+//console.log(data);
+});
+
+
+
+</script>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+<!-- <script src="/main.js"></script>-->
+</body>
+</html>
